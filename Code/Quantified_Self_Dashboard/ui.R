@@ -9,13 +9,13 @@
 
 library(shiny)
 library(shinythemes)
-
+require(DT)
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(theme = shinytheme("slate"),
+shinyUI(fluidPage(theme = shinytheme("united"),
   
   # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  titlePanel("Quantified Self Dashboard"),
   
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
@@ -27,9 +27,16 @@ shinyUI(fluidPage(theme = shinytheme("slate"),
                    value = 30)
     ),
     
-    # Show a plot of the generated distribution
+    # # Show a plot of the generated distribution
+    # mainPanel(
+    #    plotOutput("distPlot")
+    # )
+    
     mainPanel(
-       plotOutput("distPlot")
+      tabsetPanel(
+        tabPanel(DT::dataTableOutput('dt_days')),
+        tabPanel(DT::dataTableOutput('dt_pomodoros'))
+      )
     )
   )
 ))
