@@ -10,23 +10,21 @@
 library(shiny)
 require(DT)
 require(tidyverse)
+require(ggthemes)
 require(rprojroot)
 
 setwd(rprojroot::find_root("Quantified Self Dashboard.Rproj"))
 days = read_csv("Data/Input/days_16.csv")
 pomodoros = read_csv("Data/Input/pomodoros_16.csv")
 
+source("Code/Utility Functions.R")
+
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
    
-  output$distPlot <- renderPlot({
+  output$plot_days <- renderPlot({
     
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2] 
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-    
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    plotDays()
     
   })
   
