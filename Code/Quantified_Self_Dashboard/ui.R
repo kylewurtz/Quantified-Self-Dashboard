@@ -12,31 +12,12 @@ library(shinythemes)
 require(DT)
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(theme = shinytheme("united"),
+shinyUI(navbarPage(
   
   # Application title
-  titlePanel("Quantified Self Dashboard"),
-  
-  # Sidebar with a slider input for number of bins 
-  sidebarLayout(
-    sidebarPanel(
-       sliderInput("bins",
-                   "Number of bins:",
-                   min = 1,
-                   max = 50,
-                   value = 30)
-    ),
-    
-    # # Show a plot of the generated distribution
-    # mainPanel(
-    #    plotOutput("distPlot")
-    # )
-    
-    mainPanel(
-      tabsetPanel(
-        tabPanel(DT::dataTableOutput('dt_days')),
-        tabPanel(DT::dataTableOutput('dt_pomodoros'))
-      )
-    )
-  )
+  title = "Quantified Self Dashboard",
+
+  tabPanel("Days", DT::dataTableOutput('dt_days')),
+  tabPanel("Days Plot", plotOutput("plot_days")),
+  tabPanel("Pomodoros", DT::dataTableOutput('dt_pomodoros'))
 ))
